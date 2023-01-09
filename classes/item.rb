@@ -1,6 +1,6 @@
 class Item
   # Getter
-  attr_reader :genre, :source, :author
+  attr_reader :genre, :source, :author, :label
 
   def initialize(publish_date)
     @id = Random.rand(1..1000)
@@ -21,5 +21,10 @@ class Item
   def add_source(source)
     @source = source
     source.items << self unless source.items.include?(self)
+  end
+
+  def add_label(label)
+    @label = label
+    label.items << self unless label.items.include?(self)
   end
 end
