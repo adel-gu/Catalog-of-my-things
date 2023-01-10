@@ -14,10 +14,44 @@ class App
     9 - Add a book \n
     10 - Add a music album \n
     11 - Add a movie \n
-    12 - Add a game \n "
+    12 - Add a game \n
+    00 - Exit app"
   end
 
   def get_input
     gets.chomp.to_i
+  end
+
+  def selected_option(options)
+    case options
+    when 1
+      #dispaly all books
+    when 2
+      #List all music
+    when 3
+
+    when 4
+
+    when 5
+      
+    when 6
+
+    when 7
+
+    when 8
+    
+    when 9
+
+    when 10
+
+    when 11
+
+    when 12
+
+    when 0
+      exit
+    else
+      #call the prompt again
+    end
   end
 end
