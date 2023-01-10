@@ -57,18 +57,25 @@ class App
     end
   end
 
+  def list_all_genres
+    @genres.each_with_index do |genre, index|
+      puts "#{index}) Name: #{genre.name}"
+      puts
+    end
+  end
+
   def selected_option(options)
     case options
     when 1
-      list_all_music_albums
+      puts 'List all books'
     when 2
-      puts 'List all music albums'
+      list_all_music_albums
     when 3
       puts 'List all movies'
     when 4
       puts 'List all games'
     when 5
-      puts 'List all genres'
+      list_all_genres
     when 6
       puts 'List all labels'
     when 7
