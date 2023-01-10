@@ -11,7 +11,7 @@ class Genre
     @items = []
   end
 
-  def add_items(item)
+  def add_item(item)
     item.add_genre(self)
     @items << item unless @items.include?(item)
   end
