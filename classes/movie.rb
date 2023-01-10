@@ -7,7 +7,7 @@ class Movie < Item
     @silent = silent
   end
 
-  #private
+  # private
 
   def can_be_archived?
     super || @silent ? true : false
