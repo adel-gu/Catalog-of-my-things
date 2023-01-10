@@ -7,6 +7,7 @@ class Item
   def initialize(publish_date)
     @id = Random.rand(1..1000)
     @publish_date = publish_date
+    @archived = false
   end
 
   # Add this item to genre
@@ -30,9 +31,13 @@ class Item
     label.items << self unless label.items.include?(self)
   end
 
+  def move_to_archive
+    @archived = can_be_archived?
+  end
+
   private
 
-  def can_be_archived?()
+  def can_be_archived?
     current_year = Date.today.year
     current_published_year = Date.parse(@publish_date).year
     current_year - current_published_year > 10
