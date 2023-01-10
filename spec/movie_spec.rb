@@ -1,6 +1,6 @@
 require_relative '../classes/movie'
 
-movie = Movie.new('2020/2/2', true)
+movie = Movie.new('2020/2/2')
 
 describe '#Review the Movie file' do
   it 'returns true' do
