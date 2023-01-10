@@ -50,10 +50,17 @@ class App
     puts 'Book Added Succefully!!'
   end
 
+  def list_all_music_albums
+    @music_albums.each_with_index do |music_album, index|
+      puts "#{index}) Label: #{music_album.label.title} Author: #{music_album.author.first_name}, #{music_album.author.last_name} Genre: #{music_album.genre.name}, Publish Date: #{music_album.publish_date}"
+      puts
+    end
+  end
+
   def selected_option(options)
     case options
     when 1
-      puts 'List all books'
+      list_all_music_albums
     when 2
       puts 'List all music albums'
     when 3
