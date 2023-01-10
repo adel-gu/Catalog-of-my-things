@@ -10,7 +10,7 @@ describe Genre do
     it 'should add an item to the genre items when we call the add_items method' do
       genre = Genre.new('Comedy')
       expect(genre.items.length).to eq 0
-      genre.add_items(@item)
+      genre.add_item(@item)
       expect(genre.items.length).to eq 1
     end
   end
