@@ -43,7 +43,20 @@ class App
   end
 
   def add_movie
-    puts 'Book Added Succefully!!'
+    puts 'Author'
+    author = gets.chomp
+    puts 'Genre'
+    genre = gets.chomp
+    puts 'Label'
+    label = gets.chomp
+    puts 'Source'
+    source = gets.chomp
+    movie = Movie.new('2022/2/2', silent: true)
+    movie.author = author
+    movie.genre = genre
+    movie.label = label
+    movie.source = source
+    movie.add_new_movie(movie)
   end
 
   def add_game
