@@ -1,10 +1,9 @@
 require_relative '../classes/movie'
 
-before(:each) do
-  @movie = Movie.new('2020/2/2')
-end
-
 describe 'Movie Class' do
+  before(:each) do
+    @movie = Movie.new('2020/2/2')
+  end
   it 'returns true' do
     expect(movie.silent).to eql false
   end
