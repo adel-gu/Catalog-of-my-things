@@ -1,13 +1,15 @@
 require_relative '../classes/movie'
 
-movie = Movie.new('2020/2/2')
+before(:each) do
+  @movie = Movie.new('2020/2/2')
+end
 
-describe '#Review the Movie file' do
+describe 'Movie Class' do
   it 'returns true' do
     expect(movie.silent).to eql false
   end
 
   it 'returns true' do
-    expect(movie.can_be_archived?).to eql false
+    expect(movie.move_to_archive?).to eql false
   end
 end
