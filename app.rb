@@ -106,6 +106,7 @@ class App
       add_game
     when '0'
       puts 'Thanks for using the App!!'
+      save_genres
       exit
     end
   end
