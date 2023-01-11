@@ -1,15 +1,5 @@
 require_relative '../classes/game'
 
-# describe Game do
-#   before(:each) do
-#    @game = Game.new('2023-01-01', '2020-01-01', true)
-#    @game = Game.new('2020-01-01', '2018-01-01', true)
-
-#    context 'test multple player' do
-#     it ' should return true or false'
-#       expect(@game.multiple_player).to eq true
-#    end
-# end
 
 describe Game do
   before(:each) do
