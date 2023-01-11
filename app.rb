@@ -79,10 +79,6 @@ class App
     puts 'Book Added Succefully!!'
   end
 
-  def add_movie
-    puts 'Book Added Succefully!!'
-  end
-
   def add_game
     puts 'Book Added Succefully!!'
   end
