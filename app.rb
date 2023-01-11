@@ -41,7 +41,7 @@ class App
   def add_music_album
     puts 'Book Added Succefully!!'
   end
-  
+
   def add_game
     puts 'Book Added Succefully!!'
   end
