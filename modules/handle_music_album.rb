@@ -12,6 +12,14 @@ module HandleMusicAlbums
   end
 
   # Add music album
+  def add_music_album
+    publish_date = user_input("Enter item publish date: ")
+    on_spotify = user_input("Is this item on spotify [Y, N]: ").downcase == 'y'
+
+    music_album = MusicAlbum.new(publish_date, on_spotify: on_spotify)
+    create_an_item(music_album)
+    @music_albums << music_album unless @music_albums.include?(music_album)
+  end
 
   # save music albums
 
