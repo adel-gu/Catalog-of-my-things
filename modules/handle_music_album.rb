@@ -1,4 +1,6 @@
 module HandleMusicAlbums
+  FILE_NAME = "./json/music_albums.json".freeze
+
   # List music albums
   def list_all_music_albums
     if @music_albums.empty?
@@ -21,7 +23,9 @@ module HandleMusicAlbums
     @music_albums << music_album unless @music_albums.include?(music_album)
   end
 
-  # save music albums
-
   # Load music albums
+  def load_music_albums
+  end
+
+  # save music albums
 end
