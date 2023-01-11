@@ -1,3 +1,4 @@
+require 'json'
 require_relative '../classes/book'
 
 module HandleBooks
@@ -19,6 +20,7 @@ module HandleBooks
     end
   end
 
+  # add book to books array
   def add_book
     ui_decorator('Add a Book', 11)
     published_date = user_input('When was the book published?(YYYY-MM-DD): ')
@@ -27,7 +29,74 @@ module HandleBooks
     new_book = Book.new(published_date, publisher, cover_state)
     create_an_item(new_book)
     @books << new_book
+    save_book(new_book)
     puts
     puts 'Book has been added successfully!!'
+  end
+
+  # save to file
+  def save_book(book_obj)
+    book_array = []
+    @books.each do |book|
+      book_array << {
+        id: book.id,
+        publish_date: book.publish_date,
+        publisher: book.publisher,
+        cover_state: book.cover_state,
+        label: {
+          id: book.label.id,
+          title: book.label.title,
+          color: book.label.color
+        },
+        genre: {
+          id: book.genre.id,
+          name: book.genre.name
+        },
+        author: {
+          id: book.author.id,
+          first_name: book.author.first_name,
+          last_name: book.author.last_name
+        },
+        source: {
+          id: book.source.id,
+          name: book.source.name
+        }
+      }
+    end
+
+    if Dir.exists?('json') && File.exists?('json/books.json')
+      books = File.read('json/books.json')
+      books_data = JSON.parse(books)
+      books_data << {
+        id: book_obj.id,
+        publish_date: book_obj.publish_date,
+        publisher: book_obj.publisher,
+        cover_state: book_obj.cover_state,
+        label: {
+          id: book_obj.label.id,
+          title: book_obj.label.title,
+          color: book_obj.label.color
+        },
+        genre: {
+          id: book_obj.genre.id,
+          name: book_obj.genre.name
+        },
+        author: {
+          id: book_obj.author.id,
+          first_name: book_obj.author.first_name,
+          last_name: book_obj.author.last_name
+        },
+        source: {
+          id: book_obj.source.id,
+          name: book_obj.source.name
+        }
+      }
+      File.write('json/books.json', JSON.pretty_generate(books_data))
+    elsif Dir.exists?('json') && !File.exists?('json/books.json')
+      File.write('json/books.json', JSON.pretty_generate(book_array))
+    else
+      Dir.mkdir('json')
+      File.write('json/books.json', JSON.pretty_generate(book_array))
+    end
   end
 end
