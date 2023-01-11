@@ -1,6 +1,5 @@
 require_relative '../classes/source'
 require_relative '../classes/item'
-
 describe Source do
   describe '#new' do
     before :each do
@@ -9,7 +8,6 @@ describe Source do
     it 'should take two arguments and create a Source object' do
       expect(@source).to be_an_instance_of Source
     end
-
     it 'should return a non-empty items array' do
       item = Item.new('2022-04-21')
       @source.items << item
