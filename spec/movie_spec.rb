@@ -9,6 +9,6 @@ describe 'Movie Class' do
   end
 
   it 'returns true' do
-    expect(@movie.move_to_archive?).to eql false
+    expect(@movie.move_to_archive).to eql false
   end
 end
