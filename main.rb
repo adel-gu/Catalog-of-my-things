@@ -4,7 +4,7 @@ def main
   app = App.new
   loop do
     app.prompt
-    user_input = app.user_input
+    user_input = app.user_input('Select an option (Enter a number): ')
     app.selected_option(user_input)
   end
 end
