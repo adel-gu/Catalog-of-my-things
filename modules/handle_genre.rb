@@ -15,6 +15,12 @@ module HandleGenre
   end
 
   # Load genres
+  def load_genres
+    File.new(FILE_NAME, "w") unless File.exist?(FILE_NAME)
+    file = File.read(FILE_NAME)
+    genres = [*JSON.load(file)]
+    create_genre_instance(genres)
+  end
 
   # Save genres
   def save_genres
@@ -25,5 +31,11 @@ module HandleGenre
       }
     end
     File.write(FILE_NAME, JSON.generate(genres))
+  end
+
+  private
+
+  def create_genre_instance(genres)
+    genres_instances = genres.map { |genre| Genre.new(genre["name"])}
   end
 end

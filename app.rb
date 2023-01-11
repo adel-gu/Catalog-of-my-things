@@ -17,7 +17,7 @@ class App
     @music_albums = []
     @movies = []
     @games = []
-    @genres = []
+    @genres = load_genres
     @labels = []
     @authors = []
     @sources = []
