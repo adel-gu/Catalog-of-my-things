@@ -1,6 +1,5 @@
 require_relative '../classes/game'
 
-
 describe Game do
   before(:each) do
     @game = Game.new('2023-01-01', '2020-01-01', multiplayer: true)
