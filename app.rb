@@ -1,3 +1,5 @@
+require_relative './classes/music_album'
+
 class App
   def initialize
     @books = []
@@ -30,15 +32,42 @@ class App
     00 - Exit app"
   end
 
-  def user_input
-    gets.chomp.to_i
+  def user_input(msg_to_user)
+    print msg_to_user
+    gets.chomp
+  end
+
+  # Since each item we create needs some form of informations that require creating insntaces from other classes, this method devoted to provide thus data.
+  def create_an_item(item)
+    label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
+    label_color = user_input("Enter item label color: ")
+
+    author_first_name = user_input("Enter author first name: ")
+    author_last_name = user_input("Enter author first name: ")
+
+    genre_name = user_input("Enter item gener (eg. 'Comedy', 'Thriller'): ")
+
+    sourcer_name = user_input("Enter item gener ((e.g. 'From a friend', 'Online shop'): ")
+
+    # Creat the needed classes
+    label = Label.new(label_title, label_color)
+    item.add_label(label)
+    @labels << label unless @labels.include?(label)
+
+    author = Author.new(author_first_name, author_last_name)
+    item.add_author(author)
+    @authors << author unless @authors.include?(author)
+
+    genre = Genre.new(genre_name)
+    item.add_genre()
+    @genres << genre unless @genres.include?(author)
+
+    source = Source.new(sourcer_name)
+    item.add_source
+    @sources << source unless @sources.include?(source)
   end
 
   def add_book
-    puts 'Book Added Succefully!!'
-  end
-
-  def add_music_album
     puts 'Book Added Succefully!!'
   end
 
@@ -50,17 +79,10 @@ class App
     puts 'Book Added Succefully!!'
   end
 
-  def list_all_music_albums
-    @music_albums.each_with_index do |music_album, index|
-      puts "#{index}) Label: #{music_album.label.title} Author: #{music_album.author.first_name}, #{music_album.author.last_name} Genre: #{music_album.genre.name}, Publish Date: #{music_album.publish_date}"
-      puts
-    end
-  end
-
   def list_all_genres
+    # check if genres is empty
     @genres.each_with_index do |genre, index|
       puts "#{index}) Name: #{genre.name}"
-      puts
     end
   end
 
