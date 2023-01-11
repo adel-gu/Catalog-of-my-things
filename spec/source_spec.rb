@@ -11,7 +11,7 @@ describe Source do
     describe '#add_item' do
       it 'should return a non-empty items array' do
         item = Item.new('2022-04-21')
-        @source.items << item
+        @source.add_item(item)
         expect(@source.items.empty?).to be false
       end
     end
