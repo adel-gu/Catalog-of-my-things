@@ -24,8 +24,39 @@ module HandleMusicAlbums
   end
 
   # Load music albums
-  def load_music_albums
-  end
+  # def load_music_albums
+  #   File.new(FILE_NAME, "w") unless File.exist?(FILE_NAME)
+  #   file = File.read(FILE_NAME)
+  #   music_albums = [*JSON.load(file)]
+  #   create_music_albums_instance(music_albums)
+  # end
 
   # save music albums
+  def save_music_albums
+    music_albums = []
+    @music_albums.each do |music_album|
+      music_albums << {
+        publish_date: music_album.publish_date,
+        on_spotify: music_album.on_spotify,
+        genre: {name: music_album.genre.name},
+        author: {first_name: music_album.author.first_name, last_name: music_album.author.last_name},
+        source: {name: music_album.source.name},
+        label: {title: music_album.label.title, color: music_album.label.color},
+      }
+    end
+    File.write(FILE_NAME, JSON.generate(music_albums))
+  end
+
+  private
+
+  # def create_music_albums_instance(music_albums)
+  #   music_albums_instances = music_albums.map |music_album| do
+  #     # create music album
+  #     music_albumn_instance = MusicAlbum.new()
+  #     # create music genre
+  #     # create music author
+  #     # create music label
+  #     # create music album
+  #   end
+  # end
 end

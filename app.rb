@@ -107,6 +107,7 @@ class App
     when '0'
       puts 'Thanks for using the App!!'
       save_genres
+      save_music_albums
       exit
     end
   end
