@@ -18,7 +18,7 @@ module HandleGenre
   def load_genres
     File.new(FILE_NAME, 'w') unless File.exist?(FILE_NAME)
     file = File.read(FILE_NAME)
-    genres = [*JSON.parse(file)]
+    genres = [*JSON.load(file)]
     create_genre_instance(genres)
   end
 

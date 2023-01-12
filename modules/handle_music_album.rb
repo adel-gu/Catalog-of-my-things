@@ -12,7 +12,6 @@ module HandleMusicAlbums
         puts "#{index}) Label: #{music_album.label.title} | Author: #{music_album.author.first_name},#{music_album.author.last_name} | Genre: #{music_album.genre.name} | Publish Date: #{music_album.publish_date} | On Spotify: #{music_album.on_spotify}"
         puts
       end
-      p @music_albums[0].on_spotify
     end
   end
 
@@ -30,7 +29,7 @@ module HandleMusicAlbums
   def load_music_albums
     File.new(FILE_NAME, 'w') unless File.exist?(FILE_NAME)
     file = File.read(FILE_NAME)
-    music_albums = JSON.parse(file)
+    music_albums = [*JSON.load(file)]
     create_music_albums_instance(music_albums)
   end
 
