@@ -1,13 +1,23 @@
+require_relative './classes/author'
+require_relative './classes/genre'
+require_relative './classes/label'
+require_relative './classes/source'
+require_relative './modules/handle_movies'
+require_relative './modules/handle_source'
+
 class App
+  include HandleMovie
+  include HandleSource
+
   def initialize
     @books = []
     @music_albums = []
-    @movies = []
+    @movies = load_movies
     @games = []
     @genres = []
     @labels = []
     @authors = []
-    @sources = []
+    @sources = load_source
   end
 
   def prompt()
@@ -30,49 +40,70 @@ class App
     00 - Exit app"
   end
 
-  def user_input
-    gets.chomp.to_i
+  def user_input(msg_to_user)
+    print msg_to_user
+    gets.chomp
   end
 
-  def add_book
-    puts 'Book Added Succefully!!'
-  end
+  # Since each item we create needs some form of informations that
+  # require creating insntaces from other classes, this method
+  # devoted to provide thus data.
+  def create_an_item(item)
+    label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
+    label_color = user_input('Enter item label color: ')
 
-  def add_music_album
-    puts 'Book Added Succefully!!'
-  end
+    author_first_name = user_input('Enter author first name: ')
+    author_last_name = user_input('Enter author last name: ')
 
-  def add_game
-    puts 'Book Added Succefully!!'
+    genre_name = user_input('Enter item genre: ')
+
+    sourcer_name = user_input('Enter item source: ')
+
+    # Creat the needed classes
+    label = Label.new(label_title, label_color)
+    item.add_label(label)
+    @labels << label unless @labels.include?(label)
+
+    author = Author.new(author_first_name, author_last_name)
+    item.add_author(author)
+    @authors << author unless @authors.include?(author)
+
+    genre = Genre.new(genre_name)
+    item.add_genre(genre)
+    @genres << genre unless @genres.include?(genre)
+
+    source = Source.new(sourcer_name)
+    item.add_source(source)
+    @sources << source unless @sources.include?(source)
   end
 
   def selected_option(options)
     case options
-    when 1
-      puts 'List all books'
-    when 2
+    when '1'
+      list_books
+    when '2'
       puts 'List all music albums'
-    when 3
-      puts 'List all movies'
-    when 4
+    when '3'
+      list_movies
+    when '4'
       puts 'List all games'
-    when 5
+    when '5'
       puts 'List all genres'
-    when 6
+    when '6'
       puts 'List all labels'
-    when 7
+    when '7'
       puts 'List all authors'
-    when 8
-      puts 'List all sources'
-    when 9
+    when '8'
+      list_sources
+    when '9'
       add_book
-    when 10
+    when '10'
       add_music_album
-    when 11
+    when '11'
       add_movie
-    when 12
+    when '12'
       add_game
-    when 0
+    when '0'
       puts 'Thanks for using the App!!'
       exit
     end
