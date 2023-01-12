@@ -1,26 +1,26 @@
 [
   {
-    "id": 933,
-    "publish_date": "2020-12-12",
-    "publisher": "asfaf",
+    "id": 250,
+    "publish_date": "2015-12-04",
+    "publisher": "The Martini",
     "cover_state": "good",
     "label": {
-      "id": 766,
-      "title": "tfhtrh",
-      "color": "sefaw"
+      "id": 175,
+      "title": "The Matrix",
+      "color": "Brown"
     },
     "genre": {
-      "id": 319,
-      "name": "sgdr"
+      "id": 566,
+      "name": "Action"
     },
     "author": {
-      "id": 797,
-      "first_name": "fhyf",
-      "last_name": "edfsed"
+      "id": 845,
+      "first_name": "Keanu",
+      "last_name": "Reeves"
     },
     "source": {
-      "id": 81,
-      "name": "fgrrdg"
+      "id": 951,
+      "name": "Apple TV"
     }
   }
 ]

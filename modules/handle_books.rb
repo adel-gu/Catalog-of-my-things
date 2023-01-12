@@ -11,12 +11,18 @@ module HandleBooks
 
   def list_books
     ui_decorator('List of Books', 14)
-    if @books.empty?
-      puts 'No books available'
-    else
-      @books.each_with_index do |book, index|
-        puts "#{index + 1}) ID: #{book.id} Title: #{book.label.title}, Author: #{book.author.first_name} #{book.author.last_name}, Publisher: #{book.publisher}, Published Date: #{book.publish_date}"
+    if Dir.exists?('json') && File.exists?('json/books.json')
+      books = File.read('json/books.json')
+      books_data = JSON.parse(books)
+      books_data.each do |book|
+        @books << book
       end
+
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}) ID: #{book['id']} Title: #{book['label']['title']}, Author: #{book['author']['first_name']} #{book['author']['last_name']}, Publisher: #{book['publisher']}, Published Date: #{book['publish_date']}"
+      end
+    else
+      puts 'No books available'
     end
   end
 
