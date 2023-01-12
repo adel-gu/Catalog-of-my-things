@@ -1,12 +1,12 @@
 require 'json'
 
 module HandleGenre
-  FILE_NAME = "./json/genres.json".freeze
+  FILE_NAME = './json/genres.json'.freeze
 
   # List all genres
   def list_all_genre
     if @genres.empty?
-      puts "No Genre to be displayed!!"
+      puts 'No Genre to be displayed!!'
     else
       @genres.each_with_index do |genre, index|
         puts "#{index}) Genre: #{genre.name}"
@@ -16,9 +16,9 @@ module HandleGenre
 
   # Load genres
   def load_genres
-    File.new(FILE_NAME, "w") unless File.exist?(FILE_NAME)
+    File.new(FILE_NAME, 'w') unless File.exist?(FILE_NAME)
     file = File.read(FILE_NAME)
-    genres = [*JSON.load(file)]
+    genres = [*JSON.parse(file)]
     create_genre_instance(genres)
   end
 
@@ -36,6 +36,6 @@ module HandleGenre
   private
 
   def create_genre_instance(genres)
-    genres_instances = genres.map { |genre| Genre.new(genre["name"])}
+    genres.map { |genre| Genre.new(genre['name']) }
   end
 end

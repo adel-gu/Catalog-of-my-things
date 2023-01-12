@@ -3,7 +3,7 @@ require_relative './classes/genre'
 require_relative './classes/label'
 require_relative './classes/source'
 
-require_relative "./classes/music_album"
+require_relative './classes/music_album'
 
 require_relative './modules/handle_music_album'
 require_relative './modules/handle_genre'
@@ -48,13 +48,12 @@ class App
     gets.chomp
   end
 
-  # Since each item we create needs some form of informations that require creating insntaces from other classes, this method devoted to provide thus data.
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
-    label_color = user_input("Enter item label color: ")
+    label_color = user_input('Enter item label color: ')
 
-    author_first_name = user_input("Enter author first name: ")
-    author_last_name = user_input("Enter author last name: ")
+    author_first_name = user_input('Enter author first name: ')
+    author_last_name = user_input('Enter author last name: ')
 
     genre_name = user_input("Enter item genre (e.g 'Comedy', 'Thriller'): ")
 
