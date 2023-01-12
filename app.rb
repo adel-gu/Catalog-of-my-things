@@ -15,7 +15,8 @@ class App
     @movies = []
     @games = []
     @genres = []
-    @labels = []
+    @labels = load_labels
+    @curr_labels = []
     @authors = []
     @sources = []
   end
@@ -48,19 +49,20 @@ class App
   # Since each item we create needs some form of informations that require creating insntaces from other classes, this method devoted to provide thus data.
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
-    label_color = user_input("Enter item label color: ")
+    label_color = user_input('Enter item label color: ')
 
-    author_first_name = user_input("Enter author first name: ")
-    author_last_name = user_input("Enter author last name: ")
+    author_first_name = user_input('Enter author first name: ')
+    author_last_name = user_input('Enter author last name: ')
 
-    genre_name = user_input("Enter item genre: ")
+    genre_name = user_input('Enter item genre: ')
 
-    sourcer_name = user_input("Enter item source: ")
+    sourcer_name = user_input('Enter item source: ')
 
     # Creat the needed classes
     label = Label.new(label_title, label_color)
     item.add_label(label)
-    @labels << label unless @labels.include?(label)
+    @curr_labels << label unless @curr_labels.include?(label)
+    save_label(@curr_labels, label)
 
     author = Author.new(author_first_name, author_last_name)
     item.add_author(author)

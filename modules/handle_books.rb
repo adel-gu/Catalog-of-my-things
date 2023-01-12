@@ -1,7 +1,10 @@
 require 'json'
 require_relative '../classes/book'
+require_relative '../modules/handle_labels'
 
 module HandleBooks
+  include HandleLabels
+
   def ui_decorator(str, num)
     puts
     puts '-' * num
@@ -11,12 +14,12 @@ module HandleBooks
 
   def list_books
     ui_decorator('List of Books', 14)
-    if !@books.empty?
+    if @books.empty?
+      puts 'No books available'
+    else
       @books.each_with_index do |book, index|
         puts "#{index + 1}) ID: #{book['id']} Title: #{book['label']['title']}, Author: #{book['author']['first_name']} #{book['author']['last_name']}, Publisher: #{book['publisher']}, Published Date: #{book['publish_date']}"
       end
-    else
-      puts 'No books available'
     end
   end
 
@@ -25,12 +28,15 @@ module HandleBooks
     books = []
     ui_decorator('Add a Book', 11)
     published_date = user_input('When was the book published?(YYYY-MM-DD): ')
-    publisher = user_input("What\'s the name of the publisher?: ")
+    publisher = user_input("What's the name of the publisher?: ")
     cover_state = user_input('What is the state of the cover (good/bad)?: ')
     new_book = Book.new(published_date, publisher, cover_state)
     create_an_item(new_book)
     books << new_book
     save_book(books, new_book)
+    # save_label(@curr_labels, new_book.label)
+    @books = load_books
+    @labels = load_labels
     puts
     puts 'Book has been added successfully!!'
   end
@@ -65,7 +71,7 @@ module HandleBooks
       }
     end
 
-    if Dir.exists?('json') && File.exists?('json/books.json')
+    if Dir.exist?('json') && File.exist?('json/books.json')
       books = File.read('json/books.json')
       books_data = JSON.parse(books)
       books_data << {
@@ -93,7 +99,7 @@ module HandleBooks
         }
       }
       File.write('json/books.json', JSON.pretty_generate(books_data))
-    elsif Dir.exists?('json') && !File.exists?('json/books.json')
+    elsif Dir.exist?('json') && !File.exist?('json/books.json')
       File.write('json/books.json', JSON.pretty_generate(book_array))
     else
       Dir.mkdir('json')
@@ -104,7 +110,7 @@ module HandleBooks
   # load books on app start
   def load_books
     book_array = []
-    return book_array unless Dir.exists?('json') && File.exists?('json/books.json')
+    return book_array unless Dir.exist?('json') && File.exist?('json/books.json')
 
     books = File.read('json/books.json')
     books_data = JSON.parse(books)

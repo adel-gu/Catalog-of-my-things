@@ -1,50 +1,26 @@
 [
   {
-    "id": 669,
-    "publish_date": "2012-12-12",
-    "publisher": "ewf",
-    "cover_state": "good",
+    "id": 285,
+    "publish_date": "2019-12-12",
+    "publisher": "ISBN",
+    "cover_state": "Good",
     "label": {
-      "id": 837,
-      "title": "wefwsef",
-      "color": "ergrer"
+      "id": 773,
+      "title": "New Day",
+      "color": "Gray"
     },
     "genre": {
-      "id": 401,
-      "name": "awdw"
+      "id": 187,
+      "name": "Action"
     },
     "author": {
-      "id": 991,
-      "first_name": "aqwd",
-      "last_name": "ytjyj"
+      "id": 807,
+      "first_name": "John",
+      "last_name": "Wick"
     },
     "source": {
-      "id": 549,
-      "name": "aef"
-    }
-  },
-  {
-    "id": 897,
-    "publish_date": "2013-05-09",
-    "publisher": "erferf",
-    "cover_state": "bad",
-    "label": {
-      "id": 165,
-      "title": "trh",
-      "color": "qaedq"
-    },
-    "genre": {
-      "id": 317,
-      "name": "wfwe"
-    },
-    "author": {
-      "id": 453,
-      "first_name": "erge",
-      "last_name": "wef"
-    },
-    "source": {
-      "id": 878,
-      "name": "ryth"
+      "id": 812,
+      "name": "Bookstore"
     }
   }
 ]
