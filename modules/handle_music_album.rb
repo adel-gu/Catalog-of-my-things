@@ -1,3 +1,5 @@
+require 'json'
+
 module HandleMusicAlbums
   FILE_NAME = "./json/music_albums.json".freeze
 
@@ -7,9 +9,10 @@ module HandleMusicAlbums
       puts "No music album to display!!"
     else
       @music_albums.each_with_index do |music_album, index|
-        puts "#{index}) Label: #{music_album.label.title} | Author: #{music_album.author.first_name},#{music_album.author.last_name} | Genre: #{music_album.genre.name} | Publish Date: #{music_album.publish_date}"
+        puts "#{index}) Label: #{music_album.label.title} | Author: #{music_album.author.first_name},#{music_album.author.last_name} | Genre: #{music_album.genre.name} | Publish Date: #{music_album.publish_date} | On Spotify: #{music_album.on_spotify}"
         puts
       end
+      p @music_albums[0].on_spotify
     end
   end
 
@@ -24,12 +27,12 @@ module HandleMusicAlbums
   end
 
   # Load music albums
-  # def load_music_albums
-  #   File.new(FILE_NAME, "w") unless File.exist?(FILE_NAME)
-  #   file = File.read(FILE_NAME)
-  #   music_albums = [*JSON.load(file)]
-  #   create_music_albums_instance(music_albums)
-  # end
+  def load_music_albums
+    File.new(FILE_NAME, "w") unless File.exist?(FILE_NAME)
+    file = File.read(FILE_NAME)
+    music_albums = JSON.parse(file)
+    create_music_albums_instance(music_albums)
+  end
 
   # save music albums
   def save_music_albums
@@ -44,19 +47,30 @@ module HandleMusicAlbums
         label: {title: music_album.label.title, color: music_album.label.color},
       }
     end
-    File.write(FILE_NAME, JSON.generate(music_albums))
+    File.write(FILE_NAME, JSON.pretty_generate(music_albums))
   end
 
   private
 
-  # def create_music_albums_instance(music_albums)
-  #   music_albums_instances = music_albums.map |music_album| do
-  #     # create music album
-  #     music_albumn_instance = MusicAlbum.new()
-  #     # create music genre
-  #     # create music author
-  #     # create music label
-  #     # create music album
-  #   end
-  # end
+  def create_music_albums_instance(music_albums)
+    music_albums_instances = []
+    music_albums.each do |music_album|
+      # create music album
+      music_albums_instances << music_album_instance = MusicAlbum.new(music_album["publish_date"], on_spotify: music_album["on_spotify"])
+      create_association_instances(music_album_instance, music_album)
+    end
+
+    music_albums_instances
+  end
+
+  def create_association_instances(item_instance, item)
+    # create music genre
+    item_instance.add_genre(Genre.new(item["genre"]["name"]))
+    # create music author
+    item_instance.add_author(Author.new(item["author"]["first_name"], item["author"]["last_name"]))
+    # create music label
+    item_instance.add_label(Label.new(item["label"]["title"], item["label"]["color"]))
+    # create music source
+    item_instance.add_source(Source.new(item["source"]["name"]))
+  end
 end
