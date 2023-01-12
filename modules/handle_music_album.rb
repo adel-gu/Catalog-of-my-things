@@ -29,7 +29,7 @@ module HandleMusicAlbums
   def load_music_albums
     File.new(FILE_NAME, 'w') unless File.exist?(FILE_NAME)
     file = File.read(FILE_NAME)
-    music_albums = [*JSON.load(file)]
+    music_albums = file.empty? ? [] : JSON.parse(file)
     create_music_albums_instance(music_albums)
   end
 
