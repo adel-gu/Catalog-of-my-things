@@ -1,7 +1,6 @@
 require 'json'
 
 module HandleLabels
-
   def list_labels
     ui_decorator('List of Labels', 15)
     if @labels.empty?
@@ -34,11 +33,11 @@ module HandleLabels
       }
 
       File.write('json/labels.json', JSON.pretty_generate(labels_data))
-      elsif Dir.exist?('json') && !File.exist?('json/labels.json')
-        File.write('json/labels.json', JSON.pretty_generate(label_array))
-      else
-        Dir.mkdir('json')
-        File.write('json/labels.json', JSON.pretty_generate(label_array))
+    elsif Dir.exist?('json') && !File.exist?('json/labels.json')
+      File.write('json/labels.json', JSON.pretty_generate(label_array))
+    else
+      Dir.mkdir('json')
+      File.write('json/labels.json', JSON.pretty_generate(label_array))
     end
   end
 

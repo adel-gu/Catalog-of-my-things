@@ -46,7 +46,6 @@ class App
     gets.chomp
   end
 
-  # Since each item we create needs some form of informations that require creating insntaces from other classes, this method devoted to provide thus data.
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
     label_color = user_input('Enter item label color: ')
