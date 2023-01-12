@@ -34,7 +34,6 @@ module HandleBooks
     create_an_item(new_book)
     books << new_book
     save_book(books, new_book)
-    # save_label(@curr_labels, new_book.label)
     @books = load_books
     @labels = load_labels
     puts
