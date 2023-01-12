@@ -30,7 +30,7 @@ module HandleGenre
         name: genre.name
       }
     end
-    File.write(FILE_NAME, JSON.generate(genres))
+    File.write(FILE_NAME, JSON.pretty_generate(genres))
   end
 
   private
