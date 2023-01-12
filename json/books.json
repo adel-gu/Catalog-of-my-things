@@ -1,26 +1,50 @@
 [
   {
-    "id": 250,
-    "publish_date": "2015-12-04",
-    "publisher": "The Martini",
+    "id": 669,
+    "publish_date": "2012-12-12",
+    "publisher": "ewf",
     "cover_state": "good",
     "label": {
-      "id": 175,
-      "title": "The Matrix",
-      "color": "Brown"
+      "id": 837,
+      "title": "wefwsef",
+      "color": "ergrer"
     },
     "genre": {
-      "id": 566,
-      "name": "Action"
+      "id": 401,
+      "name": "awdw"
     },
     "author": {
-      "id": 845,
-      "first_name": "Keanu",
-      "last_name": "Reeves"
+      "id": 991,
+      "first_name": "aqwd",
+      "last_name": "ytjyj"
     },
     "source": {
-      "id": 951,
-      "name": "Apple TV"
+      "id": 549,
+      "name": "aef"
+    }
+  },
+  {
+    "id": 897,
+    "publish_date": "2013-05-09",
+    "publisher": "erferf",
+    "cover_state": "bad",
+    "label": {
+      "id": 165,
+      "title": "trh",
+      "color": "qaedq"
+    },
+    "genre": {
+      "id": 317,
+      "name": "wfwe"
+    },
+    "author": {
+      "id": 453,
+      "first_name": "erge",
+      "last_name": "wef"
+    },
+    "source": {
+      "id": 878,
+      "name": "ryth"
     }
   }
 ]

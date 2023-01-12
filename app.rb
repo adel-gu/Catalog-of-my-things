@@ -3,12 +3,14 @@ require_relative './classes/genre'
 require_relative './classes/label'
 require_relative './classes/source'
 require_relative './modules/handle_books'
+require_relative './modules/handle_labels'
 
 class App
   include HandleBooks
+  include HandleLabels
 
   def initialize
-    @books = []
+    @books = load_books
     @music_albums = []
     @movies = []
     @games = []
@@ -86,7 +88,7 @@ class App
     when '5'
       puts 'List all genres'
     when '6'
-      puts 'List all labels'
+      list_labels
     when '7'
       puts 'List all authors'
     when '8'

@@ -11,13 +11,7 @@ module HandleBooks
 
   def list_books
     ui_decorator('List of Books', 14)
-    if Dir.exists?('json') && File.exists?('json/books.json')
-      books = File.read('json/books.json')
-      books_data = JSON.parse(books)
-      books_data.each do |book|
-        @books << book
-      end
-
+    if !@books.empty?
       @books.each_with_index do |book, index|
         puts "#{index + 1}) ID: #{book['id']} Title: #{book['label']['title']}, Author: #{book['author']['first_name']} #{book['author']['last_name']}, Publisher: #{book['publisher']}, Published Date: #{book['publish_date']}"
       end
@@ -28,22 +22,23 @@ module HandleBooks
 
   # add book to books array
   def add_book
+    books = []
     ui_decorator('Add a Book', 11)
     published_date = user_input('When was the book published?(YYYY-MM-DD): ')
     publisher = user_input("What\'s the name of the publisher?: ")
     cover_state = user_input('What is the state of the cover (good/bad)?: ')
     new_book = Book.new(published_date, publisher, cover_state)
     create_an_item(new_book)
-    @books << new_book
-    save_book(new_book)
+    books << new_book
+    save_book(books, new_book)
     puts
     puts 'Book has been added successfully!!'
   end
 
   # save to file
-  def save_book(book_obj)
+  def save_book(curr_books, book_obj)
     book_array = []
-    @books.each do |book|
+    curr_books.each do |book|
       book_array << {
         id: book.id,
         publish_date: book.publish_date,
@@ -104,5 +99,18 @@ module HandleBooks
       Dir.mkdir('json')
       File.write('json/books.json', JSON.pretty_generate(book_array))
     end
+  end
+
+  # load books on app start
+  def load_books
+    book_array = []
+    return book_array unless Dir.exists?('json') && File.exists?('json/books.json')
+
+    books = File.read('json/books.json')
+    books_data = JSON.parse(books)
+    books_data.each do |book|
+      book_array << book
+    end
+    book_array
   end
 end
