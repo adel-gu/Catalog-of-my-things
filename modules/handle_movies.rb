@@ -26,13 +26,14 @@ module HandleMovie
     }
 
     save_movie(@movies)
+    @movies = load_movies
   end
 
   def load_movies
     if File.exist?('./json/movies.json')
       movies = File.open('./json/movies.json')
       data = movies.read
-      JSON.parse(data)
+      data.empty? ? [] : JSON.parse(data)
     else
       File.write('./json/movies.json', [])
     end
