@@ -1,14 +1,17 @@
 require_relative './modules/handle_author'
 require_relative './modules/handle_game'
 require_relative './classes/label'
+require_relative './classes/genre'
 require_relative './classes/author'
 require_relative './classes/source'
-require_relative './classes/genre.rb'
 require_relative './modules/handle_books'
 require_relative './modules/handle_labels'
 require_relative './classes/music_album'
 require_relative './modules/handle_music_album'
 require_relative './modules/handle_genre'
+require_relative './modules/handle_movies'
+require_relative './modules/handle_source'
+
 class App
   include HandleBooks
   include HandleLabels
@@ -16,20 +19,20 @@ class App
   include HandleGame
   include HandleMusicAlbums
   include HandleGenre
+  include HandleMovie
+  include HandleSource
 
   def initialize
     @books = load_books
     @music_albums = load_music_albums
-    @movies = []
+    @movies = load_movies
     @games = load_games
-    @genres = []
-    @games = []
     @genres = load_genres
+    @sources = load_source
     @labels = load_labels
     @curr_labels = []
     @authors = load_authors
     @current_authors = []
-    @sources = []
   end
 
   def prompt()
@@ -57,6 +60,10 @@ class App
     gets.chomp
   end
 
+  # Since each item we create needs some form of informations that
+  # require creating insntaces from other classes, this method
+  # devoted to provide thus data.
+
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
     label_color = user_input('Enter item label color: ')
@@ -76,15 +83,15 @@ class App
 
     author = Author.new(author_first_name, author_last_name)
     item.add_author(author)
+
     @current_authors << author unless @current_authors.include?(author)
     save_author(@current_authors, author)
+
     genre = Genre.new(genre_name)
     item.add_genre(genre)
     @genres << genre unless @genres.include?(genre)
-
     source = Source.new(sourcer_name)
-    item.add_source(source)
-    @sources << source unless @sources.include?(source)
+    @sources = item.add_source(source)
   end
 
   def selected_option(options)
@@ -94,7 +101,7 @@ class App
     when '2'
       list_all_music_albums
     when '3'
-      puts 'List all movies'
+      list_movies
     when '4'
       list_games
     when '5'
@@ -103,8 +110,8 @@ class App
       list_labels
     when '7'
       list_author
-    when 8
-      puts 'List all sources'
+    when '8'
+      list_sources
     when '9'
       add_book
     when '10'
