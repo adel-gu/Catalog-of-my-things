@@ -21,7 +21,7 @@ module HandleSource
     if File.exist?('./json/sources.json')
       sources = File.open('./json/sources.json')
       data = sources.read
-      JSON.parse(data)
+      data.empty? ? [] : JSON.parse(data)
     else
       File.write('./json/sources.json', [])
     end
@@ -29,5 +29,6 @@ module HandleSource
 
   def save_source(source)
     File.write('./json/sources.json', JSON.pretty_generate(source))
+    load_source
   end
 end
