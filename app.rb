@@ -3,6 +3,7 @@ require_relative './modules/handle_game'
 require_relative './classes/label'
 require_relative './classes/author'
 require_relative './classes/source'
+require_relative './classes/genre.rb'
 require_relative './modules/handle_books'
 require_relative './modules/handle_labels'
 require_relative './classes/music_album'
@@ -26,7 +27,6 @@ class App
     @genres = load_genres
     @labels = load_labels
     @curr_labels = []
-    @labels = []
     @authors = load_authors
     @current_authors = []
     @sources = []
