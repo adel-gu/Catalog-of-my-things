@@ -1,4 +1,3 @@
-
 require_relative './modules/handle_author'
 require_relative './modules/handle_game'
 require_relative './classes/label'
@@ -91,10 +90,10 @@ class App
       puts 'List all movies'
     when '4'
       list_games
-     when '5'
+    when '5'
       list_all_genre
     when '6'
-      puts 'List all labels'  
+      puts 'List all labels'
     when '7'
       list_author
     when 8
