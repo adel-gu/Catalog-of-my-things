@@ -1,18 +1,26 @@
+
 require_relative './modules/handle_author'
 require_relative './modules/handle_game'
 require_relative './classes/label'
-require_relative './classes/genre'
 require_relative './classes/author'
-# require_relative './classes/'
+require_relative './classes/source'
+require_relative './classes/music_album'
+require_relative './modules/handle_music_album'
+require_relative './modules/handle_genre'
 class App
   include HandleAuthor
   include HandleGame
+  include HandleMusicAlbums
+  include HandleGenre
+
   def initialize
     @books = []
-    @music_albums = []
+    @music_albums = load_music_albums
     @movies = []
     @games = load_games
     @genres = []
+    @games = []
+    @genres = load_genres
     @labels = []
     @authors = load_authors
     @current_authors = []
@@ -36,7 +44,7 @@ class App
     10 - Add a music album \n
     11 - Add a movie \n
     12 - Add a game \n
-    00 - Exit app"
+    0 - Exit app"
   end
 
   def user_input(msg_to_user)
@@ -44,7 +52,6 @@ class App
     gets.chomp
   end
 
-  # Since each item we create needs some form of informations that require creating insntaces from other classes.
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
     label_color = user_input('Enter item label color: ')
@@ -52,9 +59,9 @@ class App
     author_first_name = user_input('Enter author first name: ')
     author_last_name = user_input('Enter author last name: ')
 
-    genre_name = user_input('Enter item Genre (eg. "Comedy", "Thriller"): ')
+    genre_name = user_input("Enter item genre (e.g 'Comedy', 'Thriller'): ")
 
-    # sourcer_name = user_input("Enter item Source ((e.g. 'From a friend', 'Online shop'): ")
+    sourcer_name = user_input("Enter item source (e.g. 'From a friend', 'Online shop'): ")
 
     # Creat the needed classes
     label = Label.new(label_title, label_color)
@@ -65,44 +72,45 @@ class App
     item.add_author(author)
     @current_authors << author unless @current_authors.include?(author)
     save_author(@current_authors, author)
-
     genre = Genre.new(genre_name)
     item.add_genre(genre)
-    @genres << genre unless @genres.include?(author)
+    @genres << genre unless @genres.include?(genre)
 
-    # source = Source.new(sourcer_name)
-    # item.add_source
-    # @sources << source unless @sources.include?(source)
+    source = Source.new(sourcer_name)
+    item.add_source(source)
+    @sources << source unless @sources.include?(source)
   end
 
   def selected_option(options)
     case options
-    when 1
-      puts 'List all books'
-    when 2
-      puts 'List all music albums'
-    when 3
+    when '1'
+      list_books
+    when '2'
+      list_all_music_albums
+    when '3'
       puts 'List all movies'
     when '4'
       list_games
-    when 5
-      puts 'List all genres'
-    when 6
-      puts 'List all labels'
+     when '5'
+      list_all_genre
+    when '6'
+      puts 'List all labels'  
     when '7'
       list_author
     when 8
       puts 'List all sources'
-    when 9
+    when '9'
       add_book
-    when 10
+    when '10'
       add_music_album
-    when 11
+    when '11'
       add_movie
     when '12'
       add_game
     when '0'
-      puts "You're now Exiting your Catalog"
+      puts 'Thanks for using the App!!'
+      save_genres
+      save_music_albums
       exit
     end
   end
