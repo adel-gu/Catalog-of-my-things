@@ -14,12 +14,6 @@ module HandleGame
         puts '_________________'
       end
     end
-    # puts 'No games Available' if @games.size.zero?
-    # puts 'Available Games'
-    # @games.each_with_index do |game, index|
-    #   puts "#{index} Last_Played: #{game['last_played_at']}  Multiplayer: #{game['multiplayer']}"
-    # end
-    # puts ' List of Games'
   end
 
   def add_game
