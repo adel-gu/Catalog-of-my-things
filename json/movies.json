@@ -1,0 +1,54 @@
+[
+  {
+    "id": 58,
+    "silent": false,
+    "publish_date": "2022-4-7"
+  },
+  {
+    "id": 764,
+    "silent": true,
+    "publish_date": "2022-2-2"
+  },
+  {
+    "id": 182,
+    "genre_name": "Action Thriller",
+    "silent": false,
+    "publish_date": "2022-7-8"
+  },
+  {
+    "id": 710,
+    "genre_name": "Adventure",
+    "silent": true,
+    "publish_date": "2022-2-3"
+  },
+  {
+    "id": 756,
+    "genre_name": "bbb",
+    "silent": true,
+    "publish_date": "2022-3-4"
+  },
+  {
+    "id": 878,
+    "genre_name": "wertwer",
+    "silent": true,
+    "publish_date": "2022-4-5"
+  },
+  {
+    "id": 688,
+    "genre_name": "Thriller",
+    "silent": true,
+    "publish_date": "2022-3-4"
+  },
+  {
+    "id": 145,
+    "genre_name": "Thriller",
+    "silent": true,
+    "publish_date": "2022-1-1"
+  },
+  {
+    "id": 87,
+    "genre_name": "Thriller",
+    "silent": true,
+    "publish_date": "2022-1-1"
+  }
+]
