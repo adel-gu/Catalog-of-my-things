@@ -1,4 +1,4 @@
-## Copyright 2021, ADEL GUITOUN,
+## Copyright 2021, ADEL GUITOUN, Julius Tetteh, RICHARD CHILEYA, Kwasi Baayeh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this console app and associated documentation files, to deal in the console app without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the console app, and to permit persons to whom the console app is furnished to do so, subject to the following conditions:
 
