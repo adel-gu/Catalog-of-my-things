@@ -4,21 +4,24 @@ require_relative './classes/label'
 require_relative './classes/source'
 require_relative './modules/handle_books'
 require_relative './modules/handle_labels'
+require_relative './classes/music_album'
+require_relative './modules/handle_music_album'
+require_relative './modules/handle_genre'
 
 class App
   include HandleBooks
   include HandleLabels
+  include HandleMusicAlbums
+  include HandleGenre
 
   def initialize
     @books = load_books
-    @music_albums = []
+    @music_albums = load_music_albums
     @movies = []
     @games = []
-    @genres = []
+    @genres = load_genres
     @labels = load_labels
     @curr_labels = []
-    @authors = []
-    @sources = []
   end
 
   def prompt()
@@ -38,7 +41,7 @@ class App
     10 - Add a music album \n
     11 - Add a movie \n
     12 - Add a game \n
-    00 - Exit app"
+    0 - Exit app"
   end
 
   def user_input(msg_to_user)
@@ -53,9 +56,9 @@ class App
     author_first_name = user_input('Enter author first name: ')
     author_last_name = user_input('Enter author last name: ')
 
-    genre_name = user_input('Enter item genre: ')
+    genre_name = user_input("Enter item genre (e.g 'Comedy', 'Thriller'): ")
 
-    sourcer_name = user_input('Enter item source: ')
+    sourcer_name = user_input("Enter item source (e.g. 'From a friend', 'Online shop'): ")
 
     # Creat the needed classes
     label = Label.new(label_title, label_color)
@@ -81,13 +84,13 @@ class App
     when '1'
       list_books
     when '2'
-      puts 'List all music albums'
+      list_all_music_albums
     when '3'
       puts 'List all movies'
     when '4'
       puts 'List all games'
     when '5'
-      puts 'List all genres'
+      list_all_genre
     when '6'
       list_labels
     when '7'
@@ -104,6 +107,8 @@ class App
       add_game
     when '0'
       puts 'Thanks for using the App!!'
+      save_genres
+      save_music_albums
       exit
     end
   end
