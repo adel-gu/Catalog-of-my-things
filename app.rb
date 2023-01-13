@@ -84,7 +84,7 @@ class App
     genre = Genre.new(genre_name)
     item.add_genre(genre)
     @genres << genre unless @genres.include?(genre)
-    source = Source.new(sourcer_name)    
+    source = Source.new(sourcer_name)
     @sources = item.add_source(source)
   end
 
