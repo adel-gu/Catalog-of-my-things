@@ -1,0 +1,26 @@
+[
+  {
+    "id": 285,
+    "publish_date": "2019-12-12",
+    "publisher": "ISBN",
+    "cover_state": "Good",
+    "label": {
+      "id": 773,
+      "title": "New Day",
+      "color": "Gray"
+    },
+    "genre": {
+      "id": 187,
+      "name": "Action"
+    },
+    "author": {
+      "id": 807,
+      "first_name": "John",
+      "last_name": "Wick"
+    },
+    "source": {
+      "id": 812,
+      "name": "Bookstore"
+    }
+  }
+]
