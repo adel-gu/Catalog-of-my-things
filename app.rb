@@ -60,7 +60,6 @@ class App
 
     sourcer_name = user_input("Enter item source (e.g. 'From a friend', 'Online shop'): ")
 
-
     # Creat the needed classes
     label = Label.new(label_title, label_color)
     item.add_label(label)
