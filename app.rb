@@ -3,23 +3,29 @@ require_relative './modules/handle_game'
 require_relative './classes/label'
 require_relative './classes/author'
 require_relative './classes/source'
+require_relative './modules/handle_books'
+require_relative './modules/handle_labels'
 require_relative './classes/music_album'
 require_relative './modules/handle_music_album'
 require_relative './modules/handle_genre'
 class App
+  include HandleBooks
+  include HandleLabels
   include HandleAuthor
   include HandleGame
   include HandleMusicAlbums
   include HandleGenre
 
   def initialize
-    @books = []
+    @books = load_books
     @music_albums = load_music_albums
     @movies = []
     @games = load_games
     @genres = []
     @games = []
     @genres = load_genres
+    @labels = load_labels
+    @curr_labels = []
     @labels = []
     @authors = load_authors
     @current_authors = []
@@ -65,7 +71,8 @@ class App
     # Creat the needed classes
     label = Label.new(label_title, label_color)
     item.add_label(label)
-    @labels << label unless @labels.include?(label)
+    @curr_labels << label unless @curr_labels.include?(label)
+    save_label(@curr_labels, label)
 
     author = Author.new(author_first_name, author_last_name)
     item.add_author(author)
@@ -93,7 +100,7 @@ class App
     when '5'
       list_all_genre
     when '6'
-      puts 'List all labels'
+      list_labels
     when '7'
       list_author
     when 8
