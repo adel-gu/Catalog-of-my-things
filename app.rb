@@ -1,23 +1,33 @@
-require_relative './classes/author'
-require_relative './classes/genre'
+require_relative './modules/handle_author'
+require_relative './modules/handle_game'
 require_relative './classes/label'
+require_relative './classes/genre'
+require_relative './classes/author'
 require_relative './classes/source'
+require_relative './classes/music_album'
+require_relative './modules/handle_music_album'
+require_relative './modules/handle_genre'
 require_relative './modules/handle_movies'
 require_relative './modules/handle_source'
 
 class App
+  include HandleAuthor
+  include HandleGame
+  include HandleMusicAlbums
+  include HandleGenre
   include HandleMovie
   include HandleSource
 
   def initialize
     @books = []
-    @music_albums = []
+    @music_albums = load_music_albums
     @movies = load_movies
-    @games = []
-    @genres = []
-    @labels = []
-    @authors = []
+    @games = load_games    
+    @genres = load_genres
+    @labels = []    
     @sources = load_source
+    @authors = load_authors
+    @current_authors = []
   end
 
   def prompt()
@@ -37,7 +47,7 @@ class App
     10 - Add a music album \n
     11 - Add a movie \n
     12 - Add a game \n
-    00 - Exit app"
+    0 - Exit app"
   end
 
   def user_input(msg_to_user)
@@ -45,9 +55,11 @@ class App
     gets.chomp
   end
 
+
   # Since each item we create needs some form of informations that
   # require creating insntaces from other classes, this method
   # devoted to provide thus data.
+
   def create_an_item(item)
     label_title = user_input("Enter item label title (e.g. 'Gift', 'New'): ")
     label_color = user_input('Enter item label color: ')
@@ -55,9 +67,11 @@ class App
     author_first_name = user_input('Enter author first name: ')
     author_last_name = user_input('Enter author last name: ')
 
-    genre_name = user_input('Enter item genre: ')
 
-    sourcer_name = user_input('Enter item source: ')
+    genre_name = user_input("Enter item genre (e.g 'Comedy', 'Thriller'): ")
+
+    sourcer_name = user_input("Enter item source (e.g. 'From a friend', 'Online shop'): ")
+
 
     # Creat the needed classes
     label = Label.new(label_title, label_color)
@@ -66,7 +80,9 @@ class App
 
     author = Author.new(author_first_name, author_last_name)
     item.add_author(author)
-    @authors << author unless @authors.include?(author)
+
+    @current_authors << author unless @current_authors.include?(author)
+    save_author(@current_authors, author)
 
     genre = Genre.new(genre_name)
     item.add_genre(genre)
@@ -82,17 +98,17 @@ class App
     when '1'
       list_books
     when '2'
-      puts 'List all music albums'
+     list_all_music_albums
     when '3'
-      list_movies
+      list_movies    
     when '4'
-      puts 'List all games'
+      list_games
     when '5'
-      puts 'List all genres'
+      list_all_genre
     when '6'
       puts 'List all labels'
     when '7'
-      puts 'List all authors'
+      list_author
     when '8'
       list_sources
     when '9'
@@ -105,6 +121,8 @@ class App
       add_game
     when '0'
       puts 'Thanks for using the App!!'
+      save_genres
+      save_music_albums
       exit
     end
   end

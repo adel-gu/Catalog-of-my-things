@@ -4,7 +4,7 @@ require_relative '../modules/handle_source'
 class Item
   include HandleSource
   # Getter
-  attr_reader :genre, :source, :author, :label, :archived
+  attr_reader :genre, :source, :author, :label, :archived, :publish_date
 
   def initialize(publish_date)
     @id = Random.rand(1..1000)
