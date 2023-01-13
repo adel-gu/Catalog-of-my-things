@@ -1,16 +1,18 @@
-require_relative './classes/author'
-require_relative './classes/genre'
+require_relative './modules/handle_author'
+require_relative './modules/handle_game'
 require_relative './classes/label'
+require_relative './classes/author'
 require_relative './classes/source'
 require_relative './modules/handle_books'
 require_relative './modules/handle_labels'
 require_relative './classes/music_album'
 require_relative './modules/handle_music_album'
 require_relative './modules/handle_genre'
-
 class App
   include HandleBooks
   include HandleLabels
+  include HandleAuthor
+  include HandleGame
   include HandleMusicAlbums
   include HandleGenre
 
@@ -18,10 +20,16 @@ class App
     @books = load_books
     @music_albums = load_music_albums
     @movies = []
+    @games = load_games
+    @genres = []
     @games = []
     @genres = load_genres
     @labels = load_labels
     @curr_labels = []
+    @labels = []
+    @authors = load_authors
+    @current_authors = []
+    @sources = []
   end
 
   def prompt()
@@ -68,8 +76,8 @@ class App
 
     author = Author.new(author_first_name, author_last_name)
     item.add_author(author)
-    @authors << author unless @authors.include?(author)
-
+    @current_authors << author unless @current_authors.include?(author)
+    save_author(@current_authors, author)
     genre = Genre.new(genre_name)
     item.add_genre(genre)
     @genres << genre unless @genres.include?(genre)
@@ -88,14 +96,14 @@ class App
     when '3'
       puts 'List all movies'
     when '4'
-      puts 'List all games'
+      list_games
     when '5'
       list_all_genre
     when '6'
       list_labels
     when '7'
-      puts 'List all authors'
-    when '8'
+      list_author
+    when 8
       puts 'List all sources'
     when '9'
       add_book
