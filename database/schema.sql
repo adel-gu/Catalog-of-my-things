@@ -25,8 +25,8 @@ CREATE TABLE games (
   archived BOOLEAN,
   multiplayer BOOLEAN,
   last_played_at DATE,
-  label_id INT, 
-  genre_id INT, 
+  label_id INT,
+  genre_id INT,
   source_id INT,
   author_id INT,
   PRIMARY KEY(id),
@@ -78,8 +78,8 @@ CREATE TABLE music_albums (
 -- Label Table
 CREATE TABLE labels (
   id SERIAL NOT NULL,
-  title VARCHAR(250) NOT NULL, 
-  color VARCHAR(250) NOT NULL, 
+  title VARCHAR(250) NOT NULL,
+  color VARCHAR(250) NOT NULL,
   PRIMARY KEY (id)
 )
 
@@ -98,3 +98,24 @@ CREATE TABLE books (
   FOREIGN KEY (author_id) REFERENCES authors(id),
   FOREIGN KEY (label_id) REFERENCES labels(id),
 )
+
+-- Indexes for movie
+CREATE INDEX movie_genre_id ON genres(genre_id);
+CREATE INDEX movie_author_id ON authors(author_id);
+CREATE INDEX movie_source_id ON source(source_id);
+CREATE INDEX movie_label_id ON genres(label_id);
+-- Indexes for movie
+CREATE INDEX game_genre_id ON genres(genre_id);
+CREATE INDEX game_author_id ON authors(author_id);
+CREATE INDEX game_source_id ON source(source_id);
+CREATE INDEX game_label_id ON genres(label_id);
+-- Indexes for movie
+CREATE INDEX music_albums_genre_id ON genres(genre_id);
+CREATE INDEX music_albums_author_id ON authors(author_id);
+CREATE INDEX music_albums_source_id ON source(source_id);
+CREATE INDEX music_albums_label_id ON genres(label_id);
+-- Indexes for movie
+CREATE INDEX book_genre_id ON genres(genre_id);
+CREATE INDEX book_author_id ON authors(author_id);
+CREATE INDEX book_source_id ON source(source_id);
+CREATE INDEX book_label_id ON genres(label_id);
