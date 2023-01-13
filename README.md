@@ -107,7 +107,7 @@ Install this project with:
 Example command:
 
 ```sh
-  cd my-project
+  cd Catalog-of-my-things
   bundle install
 ```
 
