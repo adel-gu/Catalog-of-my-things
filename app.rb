@@ -22,9 +22,9 @@ class App
     @books = []
     @music_albums = load_music_albums
     @movies = load_movies
-    @games = load_games    
+    @games = load_games
     @genres = load_genres
-    @labels = []    
+    @labels = []
     @sources = load_source
     @authors = load_authors
     @current_authors = []
@@ -55,7 +55,6 @@ class App
     gets.chomp
   end
 
-
   # Since each item we create needs some form of informations that
   # require creating insntaces from other classes, this method
   # devoted to provide thus data.
@@ -67,11 +66,9 @@ class App
     author_first_name = user_input('Enter author first name: ')
     author_last_name = user_input('Enter author last name: ')
 
-
     genre_name = user_input("Enter item genre (e.g 'Comedy', 'Thriller'): ")
 
     sourcer_name = user_input("Enter item source (e.g. 'From a friend', 'Online shop'): ")
-
 
     # Creat the needed classes
     label = Label.new(label_title, label_color)
@@ -98,9 +95,9 @@ class App
     when '1'
       list_books
     when '2'
-     list_all_music_albums
+      list_all_music_albums
     when '3'
-      list_movies    
+      list_movies
     when '4'
       list_games
     when '5'
