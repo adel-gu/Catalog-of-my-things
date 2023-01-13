@@ -26,6 +26,7 @@ module HandleMovie
     }
 
     save_movie(@movies)
+    @movies = load_movies
   end
 
   def load_movies

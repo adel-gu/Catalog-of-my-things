@@ -18,5 +18,9 @@
   {
     "first_name": "Jon",
     "last_name": "Snow"
+  },
+  {
+    "first_name": "jon",
+    "last_name": "snow"
   }
 ]
